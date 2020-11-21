@@ -2,7 +2,7 @@
     <div>
         <div class="container-fulid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#"><img src="@/assets/52f07942-8734-4a79-8879-ac642131f701_200x200.png" style="width: 60px; height: 60px;" alt=""></a>
+            <a class="navbar-brand bg-light" href="#"><img src="@/assets/52f07942-8734-4a79-8879-ac642131f701_200x200.png" style="width:50px;height:50px"  alt="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -46,3 +46,11 @@
 
     </div>
 </template>
+<style scoped>
+.navbar-brand {
+  padding-top:0rem;
+  padding-bottom:0rem;
+  font-size: 0rem;
+  box-shadow: inset 0px 0 0 rgba(0, 0, 0, .25);
+}
+</style>

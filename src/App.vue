@@ -5,17 +5,24 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld';
+import HelloWorld from './components/HelloWorld';
 // import Navbar from './components/Navbar';
 
 export default {
   name: 'App',
-  components: {
-    // HelloWorld,
-    // Navbar,
-  }
+  components:{
+    HelloWorld,
+  },
+  created(){
+    // const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products`;
+    // console.log(process.env.APIPATH, process.env.CUSTOMPATH);
+    // this.$http.get(api).then((response) => {
+    // console.log(response.data)
+    // })
+  },
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "./assets/all.scss";
 </style>
