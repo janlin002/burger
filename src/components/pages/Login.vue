@@ -14,6 +14,10 @@
   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
 </form>
+  <div class="text-center">
+  <router-link class="btn btn-outline-danger" to="/">返回購物</router-link>
+  </div>
+  
     </div>
 </template>
 

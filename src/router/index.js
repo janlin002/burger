@@ -7,7 +7,9 @@ import Welcome from '@/components/Welcome';
 import Login from '@/components/pages/Login';
 import Backboard from '@/components/backboard';
 import Products from '@/components/pages/backProducts';
-
+import CustomerOrder from '@/components/pages/CustomerOrder';
+import AboutUs from '@/components/AboutUs';
+import Warning from '@/components/Warning';
 
 Vue.use(VueRouter)
 
@@ -34,7 +36,17 @@ export default new VueRouter({
         {
             name:'分布頁面',
             path:'/main',
-            component:Dashboard
+            component:Dashboard,
+        },
+        {
+            name:'關於我們',
+            path:'/about',
+            component:AboutUs
+        },
+        {
+            name:'防疫宣傳',
+            path:'/warning',
+            component:Warning
         },
         {
             name:'登入頁',
@@ -51,6 +63,18 @@ export default new VueRouter({
                     path:'products',
                     component:Products,
                     meta: { requiresAuth: true },
+                }
+            ]
+        },
+        {
+            name:'主頁',
+            path:'/',
+            component:Backboard,
+            children:[
+                {
+                    name:'模擬訂單',
+                    path:'customer_order',
+                    component:CustomerOrder,
                 }
             ]
         }

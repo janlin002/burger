@@ -103,15 +103,15 @@
       <div class="container text-center " style="color: #3D1101;">
  <div class="row">
         <div class="col-sm-4">
-          <h5>包場服務</h5>
+          <h4>包場服務</h4>
           <p>台北美麗華門市：林先生 02-26262626</p>
         </div>
         <div class="col-sm-4">
-          <h5>多人聚會方案</h5>
+          <h4>多人聚會方案</h4>
           <p>歡迎慶生、婚禮、小尾牙、迎新、畢業聚餐等，我們提供多人餐點方案，依照您的預算為您規劃餐點，歡迎家族聚會、公司行號洽詢。</p>
         </div>
         <div class="col-sm-4">
-          <h5>台北地區外送服務</h5>
+          <h4>台北地區外送服務</h4>
           <p>只要是台北市的顧客，訂單享有免費的外送服務</p>
         </div>
       </div>
@@ -174,6 +174,9 @@
     line-height: 250%;
     font-size: large;
     font-weight: 150;
+}
+p{
+  font-size: 16px;
 }
 
     
