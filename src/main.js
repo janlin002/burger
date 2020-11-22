@@ -6,15 +6,17 @@ import VueAxios from 'vue-axios';
 import 'bootstrap';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import * as VeeValidate from 'vee-validate'
-import VueI18n from 'vue-i18n';Vue.use(VueI18n);
-
 
 //自定義
 import App from './App';
 import router from './router';
 import './bus';
 import currencyFilter from './filter/currency';
+
+//vee-validate
+import { ValidationObserver, ValidationProvider, extend, localize, configure } from 'vee-validate';
+import TW from 'vee-validate/dist/locale/zh_TW.json'
+import * as rules from 'vee-validate/dist/rules';
 
 axios.defaults.withCredentials = true;//存入cookie
 
@@ -26,16 +28,16 @@ Vue.use(VueAxios, axios)
 Vue.use(Loading);
 
 
-Vue.use(VueI18n);
-const i18n = new VueI18n({
-  locale: 'zhTW'
-});
-Vue.use(VeeValidate, {
-  i18n,
-  dictionary: {
-    zhTW
-  }
-});
+// Vue.use(VueI18n);
+// const i18n = new VueI18n({
+//   locale: 'zhTW'
+// });
+// Vue.use(VeeValidate, {
+//   i18n,
+//   dictionary: {
+//     zhTW
+//   }
+// });
 
 //全域
 Vue.component('Loading',Loading);
@@ -49,13 +51,28 @@ new Vue({
   router,
 })
 //VeeValidate
-new Vue({
-  i18n,
-  el: '#app',
-  components: { App },
-  template: '<App/>',
-  router,
-})
+// new Vue({
+//   i18n,
+//   el: '#app',
+//   components: { App },
+//   template: '<App/>',
+//   router,
+// })
+Object.keys(rules).forEach((rule) => {
+  extend(rule, rules[rule]);
+});
+
+localize('zh_TW', TW);
+
+Vue.component('ValidationObserver', ValidationObserver)
+Vue.component('ValidationProvider', ValidationProvider)
+
+configure({
+  classes: {
+    valid: 'is-valid',
+    invalid: 'is-invalid',
+  },
+});
 
 
 //導航守衛

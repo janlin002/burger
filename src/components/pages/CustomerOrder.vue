@@ -43,6 +43,7 @@
         </div>
       </div>
     </div>
+    <!-- modal -->
     <div
       class="modal fade"
       id="productModal"
@@ -91,6 +92,7 @@
         </div>
       </div>
     </div>
+  <!-- 購物車介面 -->
     <div class="my-5 row justify-content-center">
       <div class="my-5 row justify-content-center">
         <table class="table">
@@ -141,47 +143,63 @@
       </div>
     </div>
 
+    <!-- 個資 -->
       <div class="my-5 row justify-content-center">
-        <form class="col-md-6" @submit.prevent="createOrder">
-          <div class="form-group">
-            <label for="useremail">Email</label>
-            <input type="email" class="form-control" name="email" id="useremail" v-validate="'required|email'"
-            :class="{'is-invalid': errors.has('email')}"
-              v-model="form.user.email" placeholder="請輸入 Email">
-            <span class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</span>
-          </div>
+        <validation-observer class="col-md-6" v-slot="{ invalid }">
+        <form  @submit.prevent="createOrder">
 
+        <validation-provider rules="required|email" v-slot="{ errors ,classes}">
           <div class="form-group">
-            <label for="username">收件人姓名</label>
-            <input type="text" class="form-control" name="name" id="username" 
-            :class="{'is-invalid': errors.has('name')}"
-            v-model="form.user.name" v-validate="'required'" placeholder="輸入姓名">
-              <!-- 錯誤提示 -->
-            <span class="text-danger" v-if="errors.has('name')">姓名必須輸入</span>
+            <label for="email">Email</label>
+        <input id="email" type="email" name="email" v-model="form.user.email"
+            class="form-control" :class="classes">
+        <!-- 錯誤訊息 -->
+        <span  class="invalid-feedback">{{ errors[0] }}</span>
           </div>
+        <!-- 輸入框 -->
+        
+      </validation-provider>
+      <validation-provider rules="required|alpha_spaces" v-slot="{ errors, classes }">
+        <!-- 輸入框 -->
+        <label for="username">收件人姓名</label>
+        <input id="username" type="text" name="姓名" v-model="form.user.name"
+          class="form-control" :class="classes">
+        <!-- 錯誤訊息 -->
+        <span class="invalid-feedback">{{ errors[0] }}</span>
+      </validation-provider>
 
-          <div class="form-group">
-            <label for="usertel">收件人電話</label>
-            <input type="tel" class="form-control" id="usertel" v-model="form.user.tel" placeholder="請輸入電話">
-          </div>
 
-          <div class="form-group">
-            <label for="useraddress">收件人地址</label>
-            <input type="address" class="form-control" name="address"
-              :class="{'is-invalid': errors.has('address')}"
-              id="useraddress" v-model="form.user.address" v-validate="'required'"
-              placeholder="請輸入地址">
-            <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
-          </div>
+        <validation-provider rules="required|alpha_num" v-slot="{ errors, classes }">
+        <!-- 輸入框 -->
+        <label for="usertel">收件人電話</label>
+        <input id="usertel" type="tel" name="電話" v-model="form.user.tel"
+          class="form-control" :class="classes">
+        <!-- 錯誤訊息 -->
+        <span class="invalid-feedback">{{ errors[0] }}</span>
+      </validation-provider>
 
-          <div class="form-group">
+      <validation-provider rules="required|alpha_spaces" v-slot="{ errors, classes }">
+        <!-- 輸入框 -->
+        <label for="email">收件人地址</label>
+        <input id="useraddress" type="address" name="地址" v-model="form.user.address"
+          class="form-control" :class="classes">
+        <!-- 錯誤訊息 -->
+        <span class="invalid-feedback">{{ errors[0] }}</span>
+      </validation-provider>
+
+      <div class="form-group">
             <label for="comment">留言</label>
             <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message"></textarea>
           </div>
-          <div class="text-right">
-            <button class="btn btn-danger">送出訂單</button>
-          </div>
+
+
+      <div class="text-right">
+        <button type="submit" class="btn btn-primary" :disabled="invalid">送出表單</button>
+      </div>
+      
         </form>
+        </validation-observer>
+
       </div>
     </div>
 </template>
