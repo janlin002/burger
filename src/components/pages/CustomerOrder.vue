@@ -145,8 +145,8 @@
 
     <!-- 個資 -->
       <div class="my-5 row justify-content-center">
-        <validation-observer class="col-md-6" v-slot="{ invalid }">
-        <form  @submit.prevent="createOrder">
+        <validation-observer class="col-md-6" v-slot="{ invalid}">
+        <form  @submit.prevent="submitForm">
 
         <validation-provider rules="required|email" v-slot="{ errors ,classes}">
           <div class="form-group">
@@ -226,13 +226,15 @@ export default {
       cart: {},
       isLoading: false,
       coupon_code: '',
+      email: '',
+      password: ''
     };
   },
   methods: {
     getProducts() {
       const vm = this;
       // API 要用 Shopping 那段，不是用 admin 的
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPTH}/products`;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products`;
       vm.isLoading = true;
       this.$http.get(url).then(response => {
         vm.products = response.data.products;
@@ -242,7 +244,7 @@ export default {
     },
     getProduct(id) {
       const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPTH}/product/${id}`;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`;
       vm.status.loadingItem = id; // 判斷目前畫面上是哪一個元素正在讀取中
       this.$http.get(url).then(response => {
         vm.product = response.data.product; // 載入並讀取資料
@@ -253,7 +255,7 @@ export default {
     },
     addtoCart(id, qty = 1) {
       const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPTH}/cart`;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
       vm.status.loadingItem = id;
       const cart = {
         product_id: id,
@@ -268,7 +270,7 @@ export default {
     },
     getCart() {
       const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPTH}/cart`;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
       vm.isLoading = true;
       this.$http.get(url).then(response => {
         vm.cart = response.data.data;
@@ -278,7 +280,7 @@ export default {
     },
     removeCartItem(id) {
       const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPTH}/cart/${id}`;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`;
       vm.isLoading = true;
       this.$http.delete(url).then(response => {
         vm.getCart();
@@ -288,7 +290,7 @@ export default {
     },
     addCouponCode() {
       const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPTH}/coupon`;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/coupon`;
       const coupon = {
         code: vm.coupon_code
       };
@@ -301,7 +303,7 @@ export default {
     },
     createOrder() {
       const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPTH}/order`;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`;
       const order = vm.form;
       // 訂單送出前先做驗證
       this.$validator.validate().then((result) =>{
@@ -317,11 +319,17 @@ export default {
           console.log('欄位不完整');
         }
       });
-    }
+    },
+    submitForm() {
+      console.log('送出表單')
+    },
+    
   },
   created() {
     this.getProducts();
     this.getCart();
+     console.log(this);
   }
 };
+
 </script>

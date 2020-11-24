@@ -33,10 +33,13 @@
                   </div>
                 </li> -->
                 <li class="nav-item">
-                  <a class="nav-link" href="#">美味菜單</a>
+                  <router-link class="nav-link" href="#" to="/menu">美味菜單</router-link>
                 </li>
                 <li class="nav-item">
                   <router-link class="nav-link " href="#" to="/warning">防疫資訊</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link class="nav-link " href="#" to="/login">後台管控</router-link>
                 </li>
               </ul>
               <!-- <form class="form-inline my-2 my-lg-0">

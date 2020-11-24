@@ -10,6 +10,7 @@ import Products from '@/components/pages/backProducts';
 import CustomerOrder from '@/components/pages/CustomerOrder';
 import AboutUs from '@/components/AboutUs';
 import Warning from '@/components/Warning';
+import Menu from '@/components/menu';
 
 Vue.use(VueRouter)
 
@@ -47,6 +48,11 @@ export default new VueRouter({
             name:'防疫宣傳',
             path:'/warning',
             component:Warning
+        },
+        {
+            name:'菜單',
+            path:'/menu',
+            component:Menu
         },
         {
             name:'登入頁',

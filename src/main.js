@@ -67,12 +67,14 @@ localize('zh_TW', TW);
 Vue.component('ValidationObserver', ValidationObserver)
 Vue.component('ValidationProvider', ValidationProvider)
 
+
 configure({
   classes: {
     valid: 'is-valid',
     invalid: 'is-invalid',
   },
 });
+
 
 
 //導航守衛
