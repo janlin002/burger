@@ -162,7 +162,7 @@
       <validation-provider rules="required|alpha_spaces" v-slot="{ errors, classes }">
         <!-- 輸入框 -->
         <label for="username">收件人姓名</label>
-        <input id="username" type="text" name="姓名" v-model="form.user.name"
+        <input id="username" type="text" name="name" v-model="form.user.name"
           class="form-control" :class="classes">
         <!-- 錯誤訊息 -->
         <span class="invalid-feedback">{{ errors[0] }}</span>
@@ -172,7 +172,7 @@
         <validation-provider rules="required|alpha_num" v-slot="{ errors, classes }">
         <!-- 輸入框 -->
         <label for="usertel">收件人電話</label>
-        <input id="usertel" type="tel" name="電話" v-model="form.user.tel"
+        <input id="usertel" type="tel" name="tel" v-model="form.user.tel"
           class="form-control" :class="classes">
         <!-- 錯誤訊息 -->
         <span class="invalid-feedback">{{ errors[0] }}</span>
@@ -181,7 +181,7 @@
       <validation-provider rules="required|alpha_spaces" v-slot="{ errors, classes }">
         <!-- 輸入框 -->
         <label for="email">收件人地址</label>
-        <input id="useraddress" type="address" name="地址" v-model="form.user.address"
+        <input id="useraddress" type="address" name="address" v-model="form.user.address"
           class="form-control" :class="classes">
         <!-- 錯誤訊息 -->
         <span class="invalid-feedback">{{ errors[0] }}</span>
@@ -305,21 +305,15 @@ export default {
       const vm = this;
       const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`;
       const order = vm.form;
-      // 訂單送出前先做驗證
-      this.$validator.validate().then((result) =>{
-        if(result){
-          this.$http.post(url, { data: order }).then(response => {
-            console.log('訂單已建立',response);
-
+      vm.isLoading = true;
+          this.$http.post(url, { data: order }).then((response) => {
+            console.log('訂單已建立', response);
             if (response.data.success) {
               vm.$router.push(`/customer_checkout/${response.data.orderId}`);
             }
+            // vm.getCart();
             vm.isLoading = false;
           });
-        }else{
-          console.log('欄位不完整');
-        }
-      });
     },
     submitForm() {
       console.log('送出表單')

@@ -15,6 +15,7 @@ import Cart from '@/components/cart';
 import Coupons from '@/components/coupons';
 import CustomerCheckout from '@/components/pages/CustomerCheckout';
 import ShopCart from '@/components/ShopCart';
+import CustomCheck from '@/components/pages/CustomCheck';
 
 Vue.use(VueRouter)
 
@@ -62,7 +63,15 @@ export default new VueRouter({
             name:'購物車',
             path:'/cart',
             component:Cart,
+            children:[
+                {
+                    name:'付款頁面',
+                    path:'pay',
+                    component:CustomCheck
+                },
+            ]
         },
+        
         {
             name:'結帳頁面',
             path:'/shopcart',
