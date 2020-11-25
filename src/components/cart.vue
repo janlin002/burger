@@ -51,6 +51,7 @@
           </div>
         </div>
         <router-link class="btn btn-outline-primary" to="/menu">繼續購物</router-link>
+        <router-link class="btn btn-outline-danger ml-3" to="/shopcart">下一步</router-link>
       </div>
     </div>
     <!-- <Footer></Footer> -->
@@ -75,7 +76,7 @@ export default {
         }
     },
     methods:{
-            getProducts() {
+      getProducts() {
       const vm = this;
       // API 要用 Shopping 那段，不是用 admin 的
       const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products`;

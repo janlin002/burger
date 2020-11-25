@@ -46,13 +46,14 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
               </form> -->
-              <!-- <button class="btn btn-sm btn-cart" data-toggle="dropdown" data-flip="false"> -->
+              <button class="btn btn-sm btn-cart" data-toggle="dropdown" data-flip="false">
                   <router-link class="btn btn-sm btn-cart" to="/cart">
                   <i class="fa fa-shopping-cart text-dark fa-2x" aria-hidden="true"></i>
-                  <span class="badge badge-pill badge-danger">{{ carts.length }}</span>
+                  <span class="badge badge-pill badge-danger">{{ cart.length }}</span>
                 </router-link>
+              </button>
                 
-            <!-- </button> -->
+                 <!-- <router-link class="btn btn-outline-danger btn-sm" to="/cart">結帳去</router-link> -->
             </div>
           </nav>
     </div>
@@ -65,9 +66,21 @@ import $ from 'jquery';
 export default {
   data(){
     return {
-      carts:{}
+      cart:[]
     }
   },
+  methods:{
+    getCart() {
+      const vm = this;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      vm.isLoading = true;
+      this.$http.get(url).then(response => {
+        vm.cart = response.data.data;
+        console.log(response);
+        vm.isLoading = false;
+      });
+    },
+  }
   
   }
 

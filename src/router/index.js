@@ -14,6 +14,7 @@ import Menu from '@/components/menu';
 import Cart from '@/components/cart';
 import Coupons from '@/components/coupons';
 import CustomerCheckout from '@/components/pages/CustomerCheckout';
+import ShopCart from '@/components/ShopCart';
 
 Vue.use(VueRouter)
 
@@ -60,7 +61,12 @@ export default new VueRouter({
         {
             name:'購物車',
             path:'/cart',
-            component:Cart
+            component:Cart,
+        },
+        {
+            name:'結帳頁面',
+            path:'/shopcart',
+            component:ShopCart
         },
         {
             name:'優惠卷',
