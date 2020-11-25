@@ -11,12 +11,13 @@
             <li>外送員在交予餐點前須先行消毒。</li>
             <li>感謝您的配合，配合防疫人人有責！</li>
         </ul>
-        <router-link class="btn btn-dark" to="/main">繼續選購</router-link>
+        <router-link class="btn btn-dark" to="/menu">繼續選購</router-link>
         
         <!-- <h5><i class="fas fa-thermometer-three-quarters fa-4x"></i>外送員在開始外送前，會量體溫，如體溫高於37.5者，不得外送</h5>
         <h5><i class="fas fa-head-side-mask fa-4x"></i>外送員全程戴口罩，結帳一率使用電子支付，減少肢體碰觸的機會</h5>
         <h5><i class="fas fa-hands-wash fa-4x"></i>外送員在交予餐點前須先行消毒</h5> -->
     </div>
+    <!-- <Footer></Footer> -->
     </div>
 </template>
 
@@ -40,7 +41,7 @@ list-style-type:none;
         font-size: 20px;
         line-height: 250%;
     }
-      .btn-cart{
+.btn-cart{
 	background-color: transparent;
 	position: relative;
 }

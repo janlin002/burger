@@ -126,7 +126,7 @@
             <div class="col-sm-6 mt-5 p-3">
             <h1>聯絡我們</h1>
             <p>電話：電話：0900-000-000</p>
-            <p>E-mail:together@gmail.com</p>
+            <p>E-mail:thelins@gmail.com</p>
             <p>地址：台北市內湖區</p>
             <p>開方時間：一到五，八點到下午七點（國定假日不開放）</p>
             </div>
@@ -178,6 +178,11 @@
 p{
   font-size: 16px;
 }
+ ul li{
+  text-decoration: circle;
+  font-size: 20px;
+}
+
 
     
 </style>

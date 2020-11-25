@@ -16,6 +16,10 @@
             產品列表
             </router-link>
           </li>
+          <router-link class="nav-link" to="/backboard/coupons">
+          <i class="fas fa-ticket-alt"></i>
+            優惠卷
+          </router-link>
         </ul>
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>模擬功能</span>

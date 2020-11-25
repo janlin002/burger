@@ -11,6 +11,9 @@ import CustomerOrder from '@/components/pages/CustomerOrder';
 import AboutUs from '@/components/AboutUs';
 import Warning from '@/components/Warning';
 import Menu from '@/components/menu';
+import Cart from '@/components/cart';
+import Coupons from '@/components/coupons';
+import CustomerCheckout from '@/components/pages/CustomerCheckout';
 
 Vue.use(VueRouter)
 
@@ -55,6 +58,16 @@ export default new VueRouter({
             component:Menu
         },
         {
+            name:'購物車',
+            path:'/cart',
+            component:Cart
+        },
+        {
+            name:'優惠卷',
+            path:'/coupons',
+            component:Coupons
+        },
+        {
             name:'登入頁',
             path:'/login',
             component:Login
@@ -81,8 +94,26 @@ export default new VueRouter({
                     name:'模擬訂單',
                     path:'customer_order',
                     component:CustomerOrder,
+                },
+                {
+                    name:'顧客確認',
+                    path:'customer_checkout/:orderId',
+                    component:CustomerCheckout,
+                },
+            ]
+        },
+        {
+            name:'後台',
+            path:'/backboard',
+            component:Backboard,
+            children:[
+                {
+                    name:'優惠卷後台',
+                    path:'coupons',
+                    component:Coupons,
+                    meta: { requiresAuth: true },
                 }
             ]
-        }
+        },
     ]
 });

@@ -46,17 +46,32 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
               </form> -->
-              <button class="btn btn-sm btn-cart" data-toggle="dropdown" data-flip="false">
-                <i class="fa fa-shopping-cart text-dark fa-2x" aria-hidden="true"></i>
-                <span class="badge badge-pill badge-danger">9</span>
-                <span class="sr-only">unread messages</span>
-            </button>
+              <!-- <button class="btn btn-sm btn-cart" data-toggle="dropdown" data-flip="false"> -->
+                  <router-link class="btn btn-sm btn-cart" to="/cart">
+                  <i class="fa fa-shopping-cart text-dark fa-2x" aria-hidden="true"></i>
+                  <span class="badge badge-pill badge-danger">{{ carts.length }}</span>
+                </router-link>
+                
+            <!-- </button> -->
             </div>
           </nav>
     </div>
 
     </div>
 </template>
+
+<script>
+import $ from 'jquery';
+export default {
+  data(){
+    return {
+      carts:{}
+    }
+  },
+  
+  }
+
+</script>
 <style scoped>
 .navbar-brand {
   padding-top:0rem;

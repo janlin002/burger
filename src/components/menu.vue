@@ -9,10 +9,9 @@
         <div class="col-md-3">
         <div class="sticky-top p-2">
             <div class="list-group">
-                <a href="#" data-toggle="list" class="list-group-item list-group-item-action active"><i class="fas fa-hamburger"></i>漢堡區</a>
-                <a href="#" data-toggle="list" class="list-group-item list-group-item-action"><i class="fas fa-pizza-slice"></i>披薩區</a>
-                <a href="#" data-toggle="list" class="list-group-item list-group-item-action"><i class="fas fa-cocktail"></i>飲料區</a>
-                <a href="#pane-4" data-toggle="list" class="list-group-item list-group-item-action"><i class="fas fa-ice-cream"></i>甜點區</a>
+              <a href="#page1" data-toggle="list" class="list-group-item list-group-item-action active">全部</a>
+                <a href="#page2" data-toggle="list" class="list-group-item list-group-item-action "><i class="fas fa-hamburger"></i>漢堡區</a>
+                <a href="#page3" data-toggle="list" class="list-group-item list-group-item-action"><i class="fas fa-pizza-slice"></i>披薩區</a>
                 <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true"><i class="fas fa-sign-out-alt"></i>即將上市，敬請期待</a>
             </div>
         </div>
@@ -22,44 +21,44 @@
         
         <div class="col-md-9">
         <div class="row mt-4">
-      <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
+      <div class="col-md-4 mb-4" v-for="item in products" :key="item.id" @click="getProduct(item.id)">
         <div class="card border-0 shadow-sm">
           <div
             style="height: 150px; background-size: cover; background-position: center"
             :style="{backgroundImage:`url(${item.imageUrl})`}"
           ></div>
           <div class="card-body">
-            <span class="badge badge-secondary float-right ml-2">分類</span>
+            <span class="badge badge-secondary float-right ml-2">{{item.category}}</span>
             <h5 class="card-title">
               <a href="#" class="text-dark">{{ item.title }}</a>
             </h5>
             <p class="card-text">{{ item.content }}</p>
             <div class="d-flex justify-content-between align-items-baseline">
               <!-- 前者僅有顯示原價 -->
-              <div class="h5" v-if="!item.price">{{ item.origin_price }}</div>
+              <div class="h5" v-if="!item.price">{{ item.origin_price }}元</div>
               <!-- 後者僅顯示原價+優惠價 -->
-              <del class="h6" v-if="item.price">{{ item.origin_price }}</del>
-              <div class="h5" v-if="item.price">{{ item.price }}</div>
+              <del class="h6" v-if="item.price">{{ item.origin_price }}元</del>
+              <div class="h5" v-if="item.price">{{ item.price }}元</div>
             </div>
           </div>
-          <div class="card-footer d-flex">
-            <button
+          <!-- <div class="card-footer d-flex"> -->
+            <!-- <button
               type="button"
               class="btn btn-outline-secondary btn-sm"
               @click="getProduct(item.id)"
             >
               <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
               查看更多
-            </button>
-            <button
+            </button> -->
+            <!-- <button
               type="button"
               class="btn btn-outline-danger btn-sm ml-auto"
               @click="addtoCart(item.id)"
             >
               <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
               加到購物車
-            </button>
-          </div>
+            </button> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -96,8 +95,9 @@
               <del class="h6" v-if="product.price">原價 {{ product.origin_price }} 元</del>
               <div class="h4" v-if="product.price">現在只要 {{ product.price }} 元</div>
             </div>
+            <h5>選購：</h5>
             <select name class="form-control mt-3" v-model="product.num">
-              <option :value="num" v-for="num in 10" :key="num">選購 {{num}} {{product.unit}}</option>
+              <option :value="num" v-for="num in 10" :key="num"> {{num}} {{product.unit}}</option>
             </select>
           </div>
           <div class="modal-footer">

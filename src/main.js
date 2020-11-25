@@ -64,8 +64,8 @@ Object.keys(rules).forEach((rule) => {
 
 localize('zh_TW', TW);
 
-Vue.component('ValidationObserver', ValidationObserver)
-Vue.component('ValidationProvider', ValidationProvider)
+Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('ValidationProvider', ValidationProvider);
 
 
 configure({

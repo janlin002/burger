@@ -146,7 +146,7 @@
     <!-- 個資 -->
       <div class="my-5 row justify-content-center">
         <validation-observer class="col-md-6" v-slot="{ invalid}">
-        <form  @submit.prevent="submitForm">
+        <form  @submit.prevent="createOrder">
 
         <validation-provider rules="required|email" v-slot="{ errors ,classes}">
           <div class="form-group">
@@ -310,6 +310,7 @@ export default {
         if(result){
           this.$http.post(url, { data: order }).then(response => {
             console.log('訂單已建立',response);
+
             if (response.data.success) {
               vm.$router.push(`/customer_checkout/${response.data.orderId}`);
             }
