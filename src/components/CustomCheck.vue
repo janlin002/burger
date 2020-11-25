@@ -91,11 +91,11 @@ export default {
         vm.isLoading = false;
     })
     },
-    created(){
+  },
+  created(){
         this.orderId=this.$route.params.orderId;//取得網址上的參數
         console.log(this.orderId);
         this.getOrder();
     }
-  }
 }
 </script>
