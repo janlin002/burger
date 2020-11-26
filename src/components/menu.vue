@@ -21,8 +21,8 @@
         
         <div class="col-md-9">
         <div class="row mt-4">
-      <div class="col-md-4 mb-4" v-for="item in products" :key="item.id" @click="getProduct(item.id)">
-        <div class="card border-0 shadow-sm">
+      <div class="col-md-4 mb-4 wei-grid-special0" v-for="item in products" :key="item.id" @click="getProduct(item.id)">
+        <div class="card border-0 shadow-sm ">
           <div
             style="height: 150px; background-size: cover; background-position: center"
             :style="{backgroundImage:`url(${item.imageUrl})`}"
@@ -235,5 +235,19 @@ export default {
 	position: absolute;
 	top: -1px;
 	right: -1px;
+}
+.wei-grid-special0 {
+position: relative;
+overflow: hidden;
+transition: box-shadow 300ms;
+}
+
+.wei-image5 {
+width: 100%;
+height: 100%;
+}
+
+.wei-grid-special0:hover {
+box-shadow: 0 8px 10px rgba(0, 0, 0, 0.6);
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
     <div>
+      <Navbar></Navbar>
         <div class="my-5 row justify-content-center">
   <form class="col-md-6" @submit-prevent="payOrder">
     <table class="table">
@@ -55,11 +56,19 @@
     </div>
   </form>
 </div>
+<Footer></Footer>
     </div>
 </template>
 
 <script>
+import $ from 'jquery';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer'
 export default {
+   components:{
+        Navbar,
+        Footer
+    },
     data(){
         return{
             orderId:'',

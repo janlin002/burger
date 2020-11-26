@@ -47,9 +47,10 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
               </form> -->
               <button class="btn btn-sm btn-cart" data-toggle="dropdown" data-flip="false">
-                  <router-link class="btn btn-sm btn-cart" to="/cart">
-                  <i class="fa fa-shopping-cart text-dark fa-2x" aria-hidden="true"></i>
-                  <span class="badge badge-pill badge-danger">{{ cart.length }}</span>
+                  <!-- <router-link class="btn btn-sm btn-cart" to="/cart">結帳 -->
+                  <router-link class="btn btn-sm btn-outline-danger" to="/cart">結帳
+                  <!-- <i class="fa fa-shopping-cart text-dark fa-2x" aria-hidcden="true"></i> -->
+                  <!-- <span class="badge badge-pill badge-danger">{{ cart.length }}</span> -->
                 </router-link>
               </button>
                 
