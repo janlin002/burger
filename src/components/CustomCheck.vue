@@ -2,7 +2,7 @@
     <div>
       <Navbar></Navbar>
         <div class="my-5 row justify-content-center">
-  <form class="col-md-6" @submit-prevent="payOrder">
+  <form class="col-md-6" @submit.prevent="payOrder">
     <table class="table">
       <thead>
         <th>品名</th>
@@ -52,16 +52,16 @@
       </tbody>
     </table>
     <div class="text-right" v-if="order.is_paid === false">
-      <button class="btn btn-danger">確認付款去</button>
+      <button class="btn btn-danger" >確認付款去</button>
     </div>
   </form>
+  
 </div>
-<Footer></Footer>
+<!-- <Footer></Footer> -->
     </div>
 </template>
 
 <script>
-import $ from 'jquery';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer'
 export default {
@@ -78,7 +78,7 @@ export default {
         }
     },
     methods:{
-        getOrder(){
+    getOrder(){
     const vm = this;
       const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order/${vm.orderId}`;
       vm.isLoading = true;
@@ -108,3 +108,5 @@ export default {
     }
 }
 </script>
+<style lang="">
+</style>
