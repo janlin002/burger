@@ -1,5 +1,6 @@
 <template>
     <div>
+      <!-- <loading :active.sync="isLoading"></loading> -->
         <Navbar></Navbar>
         <div class="container-fulid">
       <img class="tophoto" src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80" alt="">
@@ -7,22 +8,29 @@
 <div class="container pt-5">
     <div class="row">
         <div class="col-md-3">
-        <div class="sticky-top p-2">
-            <div class="list-group">
-              <a href="#page1" data-toggle="list" class="list-group-item list-group-item-action active">全部</a>
-                <a href="#page2" data-toggle="list" class="list-group-item list-group-item-action "><i class="fas fa-hamburger"></i>漢堡區</a>
-                <a href="#page3" data-toggle="list" class="list-group-item list-group-item-action"><i class="fas fa-pizza-slice"></i>披薩區</a>
-                <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true"><i class="fas fa-sign-out-alt"></i>即將上市，敬請期待</a>
-            </div>
-        </div>
+        <!-- 左側選單 -->
+        <div class="list-group sticky-top mt-4" style="top:20px">
+            <a class="list-group-item list-group-item-action"
+              href="#" @click.prevent="searchText = item"
+              :class="{ 'active': item === searchText}"
+              v-for="item in categories" :key="item">
+              <!-- <i class="fa fa-street-view" aria-hidden="true"></i> -->
+              {{ item }}
+            </a>
+            <a href="#" class="list-group-item list-group-item-action"
+              @click.prevent="searchText = ''"
+              :class="{ 'active': searchText === ''}">
+              全部顯示
+            </a>
+          </div>
     </div>
                   
                     
-        
+        <!-- 子頁面 -->
         <div class="col-md-9">
         <div class="row mt-4">
-      <div class="col-md-4 mb-4 wei-grid-special0" v-for="item in products" :key="item.id" @click="getProduct(item.id)">
-        <div class="card border-0 shadow-sm ">
+      <div class="col-md-4 mb-4 wei-grid-special0" v-for="item in products" :key="item.id">
+        <div class="card border-2 shadow-sm ">
           <div
             style="height: 150px; background-size: cover; background-position: center"
             :style="{backgroundImage:`url(${item.imageUrl})`}"
@@ -41,24 +49,24 @@
               <div class="h5" v-if="item.price">{{ item.price }}元</div>
             </div>
           </div>
-          <!-- <div class="card-footer d-flex"> -->
-            <!-- <button
+          <div class="card-footer d-flex">
+            <button
               type="button"
               class="btn btn-outline-secondary btn-sm"
               @click="getProduct(item.id)"
             >
               <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
               查看更多
-            </button> -->
-            <!-- <button
+            </button>
+            <button
               type="button"
               class="btn btn-outline-danger btn-sm ml-auto"
               @click="addtoCart(item.id)"
             >
               <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
               加到購物車
-            </button> -->
-          <!-- </div> -->
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -132,25 +140,31 @@ export default {
     },
     data(){
         return{
-            products:[],
+            // products:[],
             product:{},
-            cart:{},
-            isLoading:false,
+            // cart:{},
+            // isLoading:false,
             status: {
                 loadingItem: ""
             },
+            searchText:'',
+            // categories:[],
         }
     },
     methods:{
     getProducts() {
-      const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products`;
-      vm.isLoading = true;
-      this.$http.get(url).then(response => {
-        vm.products = response.data.products;
-        console.log(response);
-        vm.isLoading = false;
-      });
+      // const vm = this;
+      // const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products`;
+      // // vm.$store.state.isLoading = true;
+      // vm.$store.dispatch('updateLoading',true);
+      // this.$http.get(url).then(response => {
+      //   vm.products = response.data.products;
+      //   console.log(response);
+      //   vm.getUnique();
+      //   // vm.$store.state.isLoading = false;
+      //   vm.$store.dispatch('updateLoading',false);
+      // });
+      this.$store.dispatch('getProducts');
     },
     getProduct(id) {
       const vm = this;
@@ -163,54 +177,80 @@ export default {
         vm.status.loadingItem = ""; 
       });
     },
-    addtoCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-      vm.status.loadingItem = id;
-      const cart = {
-        product_id: id,
-        qty
-      };
-      this.$http.post(url, { data: cart }).then(response => {
-        console.log(response);
-        vm.status.loadingItem = "";
-        vm.getCart();
-        $("#productModal").modal("hide");
-      });
+    addtoCart(id, qty=1) {
+      // const vm = this;
+      // const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      // vm.status.loadingItem = id;
+      // const cart = {
+      //   product_id: id,
+      //   qty
+      // };
+      // this.$http.post(url, { data: cart }).then(response => {
+      //   console.log(response);
+      //   vm.status.loadingItem = "";
+      //   this.$store.dispatch('addtoCart');
+      //   vm.getCart();
+      //   $("#productModal").modal("hide");
+      // });
+      this.$store.dispatch('addtoCart',{id,qty})
     },
     getCart() {
-      const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-      vm.isLoading = true;
-      this.$http.get(url).then(response => {
-        vm.cart = response.data.data;
-        console.log(response);
-        vm.isLoading = false;
-      });
+      // const vm = this;
+      // const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      // vm.$store.state.isLoading = true;
+      // this.$http.get(url).then(response => {
+      //   vm.cart = response.data.data;
+      //   console.log(response);
+      //  vm.$store.state.isLoading = false;
+      // });
+      this.$store.dispatch('getCart');
     },
-    removeCartItem(id) {
-      const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`;
-      vm.isLoading = true;
-      this.$http.delete(url).then(response => {
-        vm.getCart();
-        console.log(response);
-        vm.isLoading = false;
-      });
-    },
+    // removeCartItem(id) {
+    //   const vm = this;
+    //   const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`;
+    //   vm.$store.state.isLoading = true;
+    //   this.$http.delete(url).then(response => {
+    //     vm.getCart();
+    //     console.log(response);
+    //     vm.$store.state.isLoading = false;
+    //   });
+    //   this.$store.dispatch('removeCartItem',id)
+    // },
     addCouponCode() {
       const vm = this;
       const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/coupon`;
       const coupon = {
         code: vm.coupon_code
       };
-      vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       this.$http.post(url, { data: coupon }).then(response => {
         console.log(response);
         vm.getCart();
-        vm.isLoading = false;
+        vm.$store.state.isLoading = false;
       });
     },
+    getUnique(){
+      const vm=this;
+      const categories=new Set();
+      vm.products.forEach((item)=>{
+        categories.add(item.category);
+      });
+      vm.categories=Array.from(categories);
+    }
+    },
+    computed:{
+      isLoading(){
+        return this.$store.state.isLoading;
+      },
+      categories(){
+        return this.$store.state.categories;
+      },
+      products(){
+        return this.$store.state.products;
+      },
+      cart(){
+        return this.$store.state.cart;
+      }
     },
     created(){
         this.getProducts();
@@ -236,7 +276,7 @@ export default {
 	top: -1px;
 	right: -1px;
 }
-.wei-grid-special0 {
+/* .wei-grid-special0 {
 position: relative;
 overflow: hidden;
 transition: box-shadow 300ms;
@@ -249,5 +289,5 @@ height: 100%;
 
 .wei-grid-special0:hover {
 box-shadow: 0 8px 10px rgba(0, 0, 0, 0.6);
-}
+} */
 </style>

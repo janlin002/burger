@@ -6,12 +6,15 @@ import VueAxios from 'vue-axios';
 import 'bootstrap';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import Vuex from 'vuex';
+
 
 //自定義
 import App from './App';
 import router from './router';
 import './bus';
 import currencyFilter from './filter/currency';
+import store from './store';
 
 //vee-validate
 import { ValidationObserver, ValidationProvider, extend, localize, configure } from 'vee-validate';
@@ -26,7 +29,7 @@ axios.defaults.withCredentials = true;//存入cookie
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 Vue.use(Loading);
-
+Vue.use(Vuex);
 
 // Vue.use(VueI18n);
 // const i18n = new VueI18n({
@@ -49,6 +52,7 @@ new Vue({
   components: { App },
   template: '<App/>',
   router,
+  store,
 })
 //VeeValidate
 // new Vue({

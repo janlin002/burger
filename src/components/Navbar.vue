@@ -46,15 +46,48 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
               </form> -->
-              <button class="btn btn-sm btn-cart" data-toggle="dropdown" data-flip="false">
-                  <!-- <router-link class="btn btn-sm btn-cart" to="/cart">結帳 -->
-                  <router-link class="btn btn-sm btn-outline-danger" to="/cart">結帳
-                  <!-- <i class="fa fa-shopping-cart text-dark fa-2x" aria-hidcden="true"></i> -->
-                  <!-- <span class="badge badge-pill badge-danger">{{ cart.length }}</span> -->
+              <!-- <button class="btn btn-sm btn-cart" data-toggle="dropdown" data-flip="false"> -->
+                  <!-- <router-link class="btn btn-sm btn-cart" to="/cart">結帳
+                  <router-link class="btn btn-sm btn-outline-danger" to="/cart">結帳  -->
+                  <!-- <i class="fa fa-shopping-cart text-dark fa-2x" aria-hidcden="true"></i>  -->
+                  <!-- <span class="badge badge-pill badge-danger">{{ cart.carts.length }}</span>
                 </router-link>
-              </button>
-                
-                 <!-- <router-link class="btn btn-outline-danger btn-sm" to="/cart">結帳去</router-link> -->
+              </button> -->
+
+        <div class="dropdown ml-auto">
+        <button class="btn btn-sm btn-cart" data-toggle="dropdown" data-flip="false">
+          <i class="fa fa-shopping-cart text-dark fa-2x" aria-hidden="true"></i>
+          <span class="badge badge-pill badge-danger">{{cart.carts.length}}</span>
+          <!-- <span class="sr-only">unread messages</span> -->
+        </button>
+
+        <div class="dropdown-menu dropdown-menu-right p-3" style="min-width: 300px" data-offset="400" >
+          <h6>已選擇商品</h6>
+          <table class="table table-sm">
+            <tbody>
+              <tr v-for="item in cart.carts" :key="item.id" v-if="cart.carts.length">
+                <td class="align-middle text-center">
+                  <!-- <a href="#" class="text-muted" @click.prevent="removeCart(item.id)">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </a> -->
+                  <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCartItem(item.id)">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+                </td>
+                <td class="align-middle">{{ item.product.title }}</td>
+                <td class="align-middle">{{ item.qty }}{{item.product.unit}}</td>
+                <td class="align-middle text-right">{{item.total}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <router-link aria-hidden="true" to="/cart" class="text-light">
+          <button class="btn btn-primary btn-block">
+            
+            <i class="fa fa-cart-plus">結帳去</i>
+          </button>
+          </router-link> 
+        </div>
+      </div>
             </div>
           </nav>
     </div>
@@ -67,20 +100,49 @@ import $ from 'jquery';
 export default {
   data(){
     return {
-      cart:[]
+      // cart:{
+      //   carts:[]
+      // }
     }
   },
   methods:{
     getCart() {
+      // const vm = this;
+      // const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      // vm.isLoading = true;
+      // this.$http.get(url).then(response => {
+      //   vm.cart = response.data.data;
+      //   console.log(response);
+      //   vm.isLoading = false;
+      // });
+      this.$store.dispatch('getCart',);
+    },
+    removeCart(id){
+    // const vm = this;
+    //   const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`;
+    //   vm.$store.state.isLoading = true;
+    //   this.$http.delete(url).then(response => {
+    //     vm.getCart();
+    //     console.log(response);
+    //     vm.$store.state.isLoading = false;
+    //   });
+    this.$store.dispatch('removeCart',id);
+    },
+     removeCartItem(id) {
       const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`;
       vm.isLoading = true;
-      this.$http.get(url).then(response => {
-        vm.cart = response.data.data;
+      this.$http.delete(url).then(response => {
+        vm.getCart();
         console.log(response);
         vm.isLoading = false;
       });
     },
+  },
+  computed:{
+    cart(){
+      return this.$store.state.cart;
+    }
   }
   
   }
