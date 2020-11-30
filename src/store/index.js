@@ -34,13 +34,13 @@ export default new Vuex.Store({
           getCart(context) {
             // const vm = this;
             const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-            this.$store.state.isLoading = true;
+            context.commit('LOADING',true);
             axios.get(url).then(response => {
               if(response.data.data.carts){
                 context.commit('CART',response.data.data);
               }
               console.log('取得購物車',response.data.data);
-             this.$store.state.isLoading = false;
+              context.commit('LOADING',false);
             });
           },
           addtoCart(context,{id, qty}) {

@@ -1,6 +1,6 @@
 <template>
     <div>
-      <!-- <loading :active.sync="isLoading"></loading> -->
+      <loading :active.sync="isLoading"></loading>
         <Navbar></Navbar>
         <div class="container-fulid">
       <img class="tophoto" src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80" alt="">
@@ -11,7 +11,7 @@
         <!-- 左側選單 -->
         <div class="list-group sticky-top mt-4" style="top:20px">
             <a class="list-group-item list-group-item-action"
-              href="#" @click.prevent="searchText = item"
+               @click.prevent="searchText = item"
               :class="{ 'active': item === searchText}"
               v-for="item in categories" :key="item">
               <!-- <i class="fa fa-street-view" aria-hidden="true"></i> -->
@@ -29,7 +29,7 @@
         <!-- 子頁面 -->
         <div class="col-md-9">
         <div class="row mt-4">
-      <div class="col-md-4 mb-4 wei-grid-special0" v-for="item in products" :key="item.id">
+      <div class="col-md-4 mb-4 wei-grid-special0" v-for="item in filterData" :key="item.id">
         <div class="card border-2 shadow-sm ">
           <div
             style="height: 150px; background-size: cover; background-position: center"
@@ -192,7 +192,8 @@ export default {
       //   vm.getCart();
       //   $("#productModal").modal("hide");
       // });
-      this.$store.dispatch('addtoCart',{id,qty})
+      this.$store.dispatch('addtoCart',{id,qty});
+      $("#productModal").modal("hide");
     },
     getCart() {
       // const vm = this;
@@ -250,7 +251,17 @@ export default {
       },
       cart(){
         return this.$store.state.cart;
+      },
+      filterData() {
+      const vm = this;
+      if (vm.searchText) {
+        return vm.products.filter((item) => {
+          const data = item.title.toLowerCase().includes(vm.searchText.toLowerCase());
+          return data;
+        });
       }
+      return this.products;
+    },
     },
     created(){
         this.getProducts();

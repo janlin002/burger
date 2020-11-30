@@ -65,9 +65,7 @@
           <div class="col-sm-4">
             <i class="fas fa-utensils fa-5x mb-3"></i>
             <h4>外送服務</h4>
-            <p></p>
-            <p>(02)2700-0000</p>
-            <p>歡迎團體，公司訂餐</p>
+            <p>(02)2700-0000<br>歡迎團體，公司訂餐</p>
           </div>
           <div class="col-sm-4">
             <i class="fas fa-map-marker-alt fa-5x mb-3"></i>

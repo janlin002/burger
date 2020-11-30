@@ -109,4 +109,13 @@ export default {
 }
 </script>
 <style lang="">
+.btn-cart{
+	background-color: transparent;
+	position: relative;
+}
+.btn-cart .badge{
+	position: absolute;
+	top: -1px;
+	right: -1px;
+}
 </style>
