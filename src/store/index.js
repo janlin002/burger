@@ -4,6 +4,9 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+//state模組區域變數
+//actions,mutations,getters全域變數
+
 export default new Vuex.Store({
     strict:true,
     state:{
