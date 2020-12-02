@@ -30,5 +30,9 @@
 <h5>疫情管控</h5>
 
 ![疫情](https://img.onl/JMNrMr)
-<h1>後台服務介紹</h1>
+<h1>後台服務</h1>
+
+![新增商品](https://img.onl/Fr3NRB)
+
+![優惠碼](https://img.onl/LaRfF)
 
